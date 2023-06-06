@@ -6,6 +6,16 @@ import { WebMidi } from 'webmidi'
 import './style.css'
 import preguntas from './preguntas'
 
+const OPACITY_CC = 7;               // opacity
+const QUESTION_NUMBER_CC = 8;       // amount of questions (1-8)
+const FONT_SIZE_CC = 9;             // font size
+const FONT_FAMILY_CC = 10;          // font family (8 fonts)
+const INTERVAL_QUESTIONS_CC = 11;   // interval for random questions
+const INTERVAL_CASING_CC = 12;      // interval for random casing
+const INTERVAL_POSITION_CC = 13;    // interval for random position
+const INTERVAL_COLOR_CC = 14;       // interval for random color
+
+
 function init(){
   enableMIDI();
 
@@ -81,16 +91,19 @@ function subscribeToAllMIDIInputs() {
       const ccv = e.value;
       // change cnn # if reasigning knows or faders
 
+      if (ccn === OPACITY_CC) {
+        texto.style.opacity = rescale(ccv, 0, 1).toString();
+      }
 
-      if (ccn === 16) { 
-        // console.log( rescale(ccv, 20, 100).toString())
-        texto.style.fontSize = `${rescale(ccv, 20, 100).toString()}px`;
-        }
+      // if (ccn === 1) { 
+      //   // console.log( rescale(ccv, 20, 100).toString())
+      //   texto.style.fontSize = `${rescale(ccv, 20, 100).toString()}px`;
+      //   }
 
-      if (ccn === 32) { 
-        // console.log( rescale(ccv, 20, 100).toString())
-        texto.style.color = randomRgbColor();
-        }
+      // if (ccn === 2) { 
+      //   // console.log( rescale(ccv, 20, 100).toString())
+      //   texto.style.color = randomRgbColor();
+      //   }
       
       // if (ccn === 17) { 
       //   // console.log( rescale(ccv, 20, 100).toString())
