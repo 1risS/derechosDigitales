@@ -95,10 +95,9 @@ function subscribeToAllMIDIInputs() {
         texto.style.opacity = rescale(ccv, 0, 1).toString();
       }
 
-      // if (ccn === 1) { 
-      //   // console.log( rescale(ccv, 20, 100).toString())
-      //   texto.style.fontSize = `${rescale(ccv, 20, 100).toString()}px`;
-      //   }
+      if (ccn === FONT_SIZE_CC) { 
+        texto.style.fontSize = `${rescale(ccv, 20, 100).toString()}px`;
+      }
 
       // if (ccn === 2) { 
       //   // console.log( rescale(ccv, 20, 100).toString())
