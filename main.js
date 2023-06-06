@@ -4,17 +4,20 @@ import './style.css'
 import Hydra from 'hydra-synth'
 import { WebMidi } from 'webmidi'
 import './style.css'
+import { AnimationInterval } from './interval';
 import preguntas from './preguntas'
+import fonts from './fonts'
 
 const OPACITY_CC = 7;               // opacity
 const QUESTION_NUMBER_CC = 8;       // amount of questions (1-8)
 const FONT_SIZE_CC = 9;             // font size
-const FONT_FAMILY_CC = 10;          // font family (8 fonts)
+const INTERVAL_FAMILY_CC = 10;      // interval font family (8 fonts)
 const INTERVAL_QUESTIONS_CC = 11;   // interval for random questions
 const INTERVAL_CASING_CC = 12;      // interval for random casing
 const INTERVAL_POSITION_CC = 13;    // interval for random position
 const INTERVAL_COLOR_CC = 14;       // interval for random color
 
+let questionAnim, familyAnim;
 
 function init(){
   enableMIDI();
@@ -26,8 +29,15 @@ function init(){
   // window.addEventListener('resize', onWindowResize);
   window.addEventListener("message", handleFlokMessages, false);
 
-  addTxt()
+  const texto = document.getElementById("texto")
 
+  questionAnim = new AnimationInterval(() => {
+    texto.innerHTML = getRandomElement()
+  }, 1000);
+
+  familyAnim = new AnimationInterval(() => {
+    texto.style.fontFamily = fonts[Math.floor(Math.random() * fonts.length)]
+  }, 1000);
 }
 
 function getRandomElement() {
@@ -58,18 +68,6 @@ function enableMIDI() {
   });
 }
 
-let interval = 1000;
-
-function addTxt () {
-
-  const texto = document.getElementById("texto")
-
-  setInterval(()=> { 
-    texto.innerHTML = getRandomElement()
-  }, interval)
-
-}
-
 function rescale(v, min, max) {
   return v * (max - min) + min;
 }
@@ -97,6 +95,14 @@ function subscribeToAllMIDIInputs() {
 
       if (ccn === FONT_SIZE_CC) { 
         texto.style.fontSize = `${rescale(ccv, 20, 100).toString()}px`;
+      }
+
+      if (ccn === INTERVAL_FAMILY_CC) { 
+        familyAnim.duration = rescale(ccv, 100, 10000);
+      }
+
+      if (ccn === INTERVAL_QUESTIONS_CC) {
+        questionAnim.duration = rescale(ccv, 100, 10000);
       }
 
       // if (ccn === 2) { 
