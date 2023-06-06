@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DDDD live coding set</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <canvas id="hydra"></canvas>
+    <iframe id="flok" scrolling="no" frameborder="0"
+    src="http://localhost:3000/s/dddd?layout=tidal,hydra&noHydra=1&bgOpacity=0" allow="geolocation"></iframe>
+
+    <div id="error"></div>
+    <div class="txtContainer">
+      <div id="texto"> </div>
+    </div>
+    
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>

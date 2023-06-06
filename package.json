@@ -1,0 +1,18 @@
+{
+  "name": "derechos_digitales",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^4.3.9"
+  },
+  "dependencies": {
+    "hydra-synth": "^1.3.27",
+    "webmidi": "^3.1.6"
+  }
+}
